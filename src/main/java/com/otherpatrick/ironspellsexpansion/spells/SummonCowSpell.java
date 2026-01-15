@@ -8,44 +8,51 @@ import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.TargetEntityCastData;
+import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class LaunchSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.tryBuild(IronSpellsExpansion.MODID, "launch_spell");
+public class SummonCowSpell extends AbstractSpell {
+    private final ResourceLocation spellId = ResourceLocation.tryBuild(IronSpellsExpansion.MODID, "cow_spell");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.ironspellsexpansion.launch_spell", Utils.stringTruncation(getSpellPower(spellLevel, caster), 1))
+                Component.translatable("ui.ironspellsexpansion.cow_spell", Utils.stringTruncation(getSpellPower(spellLevel, caster), 1))
         );
     }
-
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.HOLY_RESOURCE)
             .setMaxLevel(10)
             .setCooldownSeconds(20)
             .build();
-
-    public LaunchSpell() {
+    public SummonCowSpell() {
         this.manaCostPerLevel = 5;
-        this.baseSpellPower = 10;
+        this.baseSpellPower = 0;
         this.baseManaCost = 5;
-        this.castTime = 0;
-        this.spellPowerPerLevel = 5;
+        this.castTime = 3;
+        this.spellPowerPerLevel = 1;
     }
-
     @Override
     public ResourceLocation getSpellResource() {
         return spellId;
@@ -58,51 +65,36 @@ public class LaunchSpell extends AbstractSpell {
 
     @Override
     public CastType getCastType() {
-        return CastType.INSTANT;
+        return CastType.LONG;
     }
-
     @Override
     public Optional<SoundEvent> getCastStartSound() {
-        return Optional.empty();
+        return Optional.of(SoundRegistry.RAISE_DEAD_START.get());
     }
 
     @Override
     public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.empty();
-    }
-
-    private double computeLaunchVelocity(int spellLevel, Entity caster) {
-        double power = getSpellPower(spellLevel, caster);
-        return 1.0 + (power / 60.0);
-    }
-
-    @Override
-    public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity entity, MagicData playerMagicData) {
-        return Utils.preCastTargetHelper(level, entity, playerMagicData, this, 32, .35f);
+        return Optional.of(SoundRegistry.RAISE_DEAD_FINISH.get());
     }
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-//        if (entity instanceof Player player) {
-//            player.setDeltaMovement(
-//                    player.getDeltaMovement().x,
-//                    computeLaunchVelocity(spellLevel, entity),
-//                    player.getDeltaMovement().z
-//            );
-//            player.hurtMarked = true;
-//            player.fallDistance = 0;
-//        }
-//        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        if (playerMagicData.getAdditionalCastData() instanceof TargetEntityCastData castData) {
-            LivingEntity target = castData.getTarget((ServerLevel) level);
-            if (target != null) {
-                target.setDeltaMovement(target.getDeltaMovement().x, computeLaunchVelocity(spellLevel, target), target.getDeltaMovement().z);
-                target.hurtMarked = true;
-            }
+        float radius = 1.5f + .185f * spellLevel;
+        for (int i = 0; i < spellLevel; i++) {
+            Cow cow = new Cow(EntityType.COW, level);
+            cow.finalizeSpawn((ServerLevel)level, level.getCurrentDifficultyAt(cow.getOnPos()), MobSpawnType.MOB_SUMMONED, null);
+            var yrot = 6.281f / spellLevel * i + entity.getYRot() * Mth.DEG_TO_RAD;
+            Vec3 spawn = Utils.moveToRelativeGroundLevel(
+                    level, entity.getEyePosition().add(
+                            new Vec3(radius * Mth.cos(yrot),
+                                    0,
+                                    radius * Mth.sin(yrot))), 10
+            );
+            cow.setPos(spawn);
+            cow.setYRot(entity.getYRot());
+            cow.setOldPosAndRot();
+            level.addFreshEntity(cow);
         }
-
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-
     }
 
     @Override

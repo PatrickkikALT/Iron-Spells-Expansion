@@ -1,15 +1,11 @@
 {
-  "itemGroup.ironspellsexpansion": "Example Mod Tab",
-  "block.ironspellsexpansion.example_block": "Example Block",
-  "item.ironspellsexpansion.example_item": "Example Item",
-
-  "ironspellsexpansion.configuration.title": "Iron Spells Expansion Configs",
-  "ironspellsexpansion.configuration.section.ironspellsexpansion.common.toml": "Iron Spells Expansion Configs",
-  "ironspellsexpansion.configuration.section.ironspellsexpansion.common.toml.title": "Iron Spells Expansion Configs",
-  "ironspellsexpansion.configuration.items": "Item List",
-  "ironspellsexpansion.configuration.logDirtBlock": "Log Dirt Block",
-  "ironspellsexpansion.configuration.magicNumberIntroduction": "Magic Number Text",
-  "ironspellsexpansion.configuration.magicNumber": "Magic Number",
-  "spell.ironspellexpansion.launch_spell": "Launch Spell",
-  "ui.ironspellexpansion.launch_spell": "%d Blocks"
+  "spell.ironspellsexpansion.launch_spell": "Launch Spell",
+  "spell.ironspellsexpansion.launch_spell.guide": "Launch your target up high.",
+  "ui.ironspellsexpansion.launch_spell": "%d Blocks",
+  "ui.ironspellsexpansion.cow_spell": "%d Cows",
+  "spell.ironspellsexpansion.cow_spell": "Summon Cows",
+  "spell.ironspellsexpansion.cow_spell.guide": "Summons a couple cows.",
+  "ui.ironspellsexpansion.smelt_spell": "%d Range",
+  "spell.ironspellsexpansion.smelt_spell": "Smelt",
+  "spell.ironspellsexpansion.smelt_spell.guide": "Smelts item and burns entities in range"
 }
