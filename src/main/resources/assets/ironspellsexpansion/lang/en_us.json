@@ -1,0 +1,13 @@
+{
+  "itemGroup.ironspellsexpansion": "Example Mod Tab",
+  "block.ironspellsexpansion.example_block": "Example Block",
+  "item.ironspellsexpansion.example_item": "Example Item",
+
+  "ironspellsexpansion.configuration.title": "Iron Spells Expansion Configs",
+  "ironspellsexpansion.configuration.section.ironspellsexpansion.common.toml": "Iron Spells Expansion Configs",
+  "ironspellsexpansion.configuration.section.ironspellsexpansion.common.toml.title": "Iron Spells Expansion Configs",
+  "ironspellsexpansion.configuration.items": "Item List",
+  "ironspellsexpansion.configuration.logDirtBlock": "Log Dirt Block",
+  "ironspellsexpansion.configuration.magicNumberIntroduction": "Magic Number Text",
+  "ironspellsexpansion.configuration.magicNumber": "Magic Number"
+}
