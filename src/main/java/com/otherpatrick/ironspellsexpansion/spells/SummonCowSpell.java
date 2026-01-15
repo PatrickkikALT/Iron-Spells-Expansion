@@ -42,7 +42,7 @@ public class SummonCowSpell extends AbstractSpell {
     }
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
-            .setSchoolResource(SchoolRegistry.HOLY_RESOURCE)
+            .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(10)
             .setCooldownSeconds(20)
             .build();

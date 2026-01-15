@@ -9,6 +9,7 @@ import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.TargetEntityCastData;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -100,11 +101,11 @@ public class SmeltSpell extends AbstractSpell {
         for (Entity target : entities) {
             if (target instanceof LivingEntity living) {
                 serverLevel.sendParticles(
-                        ParticleTypes.FLAME,
+                        ParticleHelper.FIRE_EMITTER,
                         target.getX(),
                         target.getY(),
                         target.getZ(),
-                        64,
+                        32,
                         0.3, 0.5, 0.3,
                         0.06);
                 living.setRemainingFireTicks(20 * 3);
@@ -117,11 +118,11 @@ public class SmeltSpell extends AbstractSpell {
                                 .getRecipeFor(RecipeType.SMELTING, container, level);
                 if (recipe.isPresent()) {
                     serverLevel.sendParticles(
-                            ParticleTypes.FLAME,
+                            ParticleHelper.FIRE_EMITTER,
                             item.getX(),
                             item.getY(),
                             item.getZ(),
-                            64,
+                            32,
                             0.3, 0.5, 0.3,
                             0.06);
                     ItemStack result = recipe.get().value().assemble(container, level.registryAccess());

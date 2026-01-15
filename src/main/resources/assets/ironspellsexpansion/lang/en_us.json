@@ -7,5 +7,8 @@
   "spell.ironspellsexpansion.cow_spell.guide": "Summons a couple cows.",
   "ui.ironspellsexpansion.smelt_spell": "%d Range",
   "spell.ironspellsexpansion.smelt_spell": "Smelt",
-  "spell.ironspellsexpansion.smelt_spell.guide": "Smelts item and burns entities in range"
+  "spell.ironspellsexpansion.smelt_spell.guide": "Smelts item and burns entities in range",
+  "ui.ironspellsexpansion.repair_spell": "%d block range",
+  "spell.ironspellsexpansion.repair_spell": "Repair",
+  "spell.ironspellsexpansion.repair_spell.guide": "Repairs a nearby anvil."
 }

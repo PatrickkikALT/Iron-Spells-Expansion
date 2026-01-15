@@ -1,6 +1,7 @@
 package com.otherpatrick.ironspellsexpansion;
 
 import com.otherpatrick.ironspellsexpansion.spells.LaunchSpell;
+import com.otherpatrick.ironspellsexpansion.spells.RepairSpell;
 import com.otherpatrick.ironspellsexpansion.spells.SmeltSpell;
 import com.otherpatrick.ironspellsexpansion.spells.SummonCowSpell;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
@@ -22,4 +23,5 @@ public class CustomSpellRegistry {
     public static final DeferredHolder<AbstractSpell, AbstractSpell> LAUNCH_SPELL = registerSpell(new LaunchSpell());
     public static final DeferredHolder<AbstractSpell, AbstractSpell> COW_SPELL = registerSpell(new SummonCowSpell());
     public static final DeferredHolder<AbstractSpell, AbstractSpell> SMELT_SPELL = registerSpell(new SmeltSpell());
+    public static final DeferredHolder<AbstractSpell, AbstractSpell> REPAIR_SPELL = registerSpell(new RepairSpell());
 }
