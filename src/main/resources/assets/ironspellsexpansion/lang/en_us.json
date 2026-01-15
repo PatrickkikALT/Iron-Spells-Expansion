@@ -9,5 +9,7 @@
   "ironspellsexpansion.configuration.items": "Item List",
   "ironspellsexpansion.configuration.logDirtBlock": "Log Dirt Block",
   "ironspellsexpansion.configuration.magicNumberIntroduction": "Magic Number Text",
-  "ironspellsexpansion.configuration.magicNumber": "Magic Number"
+  "ironspellsexpansion.configuration.magicNumber": "Magic Number",
+  "spell.ironspellexpansion.launch_spell": "Launch Spell",
+  "ui.ironspellexpansion.launch_spell": "%d Blocks"
 }
