@@ -10,5 +10,11 @@
   "spell.ironspellsexpansion.smelt_spell.guide": "Smelts item and burns entities in range",
   "ui.ironspellsexpansion.repair_spell": "%d block range",
   "spell.ironspellsexpansion.repair_spell": "Repair",
-  "spell.ironspellsexpansion.repair_spell.guide": "Repairs a nearby anvil."
+  "spell.ironspellsexpansion.repair_spell.guide": "Repairs a nearby anvil.",
+  "ui.ironspellsexpansion.shrink_spell": "%d block size",
+  "spell.ironspellsexpansion.shrink_spell": "Shrink",
+  "spell.ironspellsexpansion.shrink_spell.guide": "Shrinks you down to a smaller size",
+  "ui.ironspellsexpansion.cookie_spell": "cookie §4CREATIVE ONLY!",
+  "spell.ironspellsexpansion.cookie_spell": "Cookie",
+  "spell.ironspellsexpansion.cookie_spell.guide": "Turns the target into a cookie."
 }

@@ -7,45 +7,48 @@ import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import io.redspace.ironsspellbooks.capabilities.magic.TargetEntityCastData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Optional;
 
-public class SummonCowSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.tryBuild(IronSpellsExpansion.MODID, "cow_spell");
+public class ShrinkSpell extends AbstractSpell {
+    private final ResourceLocation spellId = ResourceLocation.tryBuild(IronSpellsExpansion.MODID, "shrink_spell");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.ironspellsexpansion.cow_spell", Utils.stringTruncation(getSpellPower(spellLevel, caster), 1))
+                Component.translatable("ui.ironspellsexpansion.shrink_spell", Utils.stringTruncation(getSpellPower(spellLevel, caster), 1))
         );
     }
+
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
-            .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
-            .setMaxLevel(10)
+            .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
+            .setMaxLevel(3)
             .setCooldownSeconds(20)
             .build();
-    public SummonCowSpell() {
+
+    public ShrinkSpell() {
         this.manaCostPerLevel = 5;
-        this.baseSpellPower = 0;
+        this.baseSpellPower = 1;
         this.baseManaCost = 5;
-        this.castTime = 3;
+        this.castTime = 0;
         this.spellPowerPerLevel = 1;
     }
+
     @Override
     public ResourceLocation getSpellResource() {
         return spellId;
@@ -58,36 +61,34 @@ public class SummonCowSpell extends AbstractSpell {
 
     @Override
     public CastType getCastType() {
-        return CastType.LONG;
+        return CastType.INSTANT;
     }
+
     @Override
     public Optional<SoundEvent> getCastStartSound() {
-        return Optional.of(SoundRegistry.RAISE_DEAD_START.get());
+        return Optional.empty();
     }
 
     @Override
     public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundRegistry.RAISE_DEAD_FINISH.get());
+        return Optional.empty();
     }
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        float radius = 1.5f + .185f * spellLevel;
-        for (int i = 0; i < spellLevel; i++) {
-            Cow cow = new Cow(EntityType.COW, level);
-            cow.finalizeSpawn((ServerLevel)level, level.getCurrentDifficultyAt(cow.getOnPos()), MobSpawnType.MOB_SUMMONED, null);
-            var yrot = 6.281f / spellLevel * i + entity.getYRot() * Mth.DEG_TO_RAD;
-            Vec3 spawn = Utils.moveToRelativeGroundLevel(
-                    level, entity.getEyePosition().add(
-                            new Vec3(radius * Mth.cos(yrot),
-                                    0,
-                                    radius * Mth.sin(yrot))), 10
-            );
-            cow.setPos(spawn);
-            cow.setYRot(entity.getYRot());
-            cow.setOldPosAndRot();
-            level.addFreshEntity(cow);
+        if (entity instanceof Player player) {
+            AttributeInstance scale = player.getAttribute(Attributes.SCALE);
+            if (scale != null) {
+                if (scale.getBaseValue() != 1) {
+                    scale.setBaseValue(1);
+                }
+                else {
+                    scale.setBaseValue(scale.getBaseValue() - (0.25 * spellLevel));
+                }
+            }
         }
+        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+
     }
 
     @Override

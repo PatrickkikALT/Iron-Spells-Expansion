@@ -125,6 +125,8 @@ dependencies {
     implementation "curse.maven:curios-309927:6529130"
     implementation "curse.maven:geckolib-388172:7415496"
     implementation "curse.maven:playeranimator-658587:7389814"
+    implementation "curse.maven:cobblemon-687131:7273151"
+    implementation "curse.maven:kotlinforforge-351264:6994056"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
