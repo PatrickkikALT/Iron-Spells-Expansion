@@ -3,6 +3,7 @@ plugins {
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.139'
     id 'idea'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -20,12 +21,21 @@ group = mod_group_id
 def irons_spells_version = "1.21.1-3.15.0"
 
 repositories {
+    mavenCentral()
     maven {
         name = "Iron's Maven - Release"
         url = "https://code.redspace.io/releases"
     }
     maven {
         url = "https://cursemaven.com"
+    }
+    maven {
+        name = "Cobblemon"
+        url = "https://maven.impactdev.net/repository/development/"
+    }
+    maven {
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
     }
 }
 
@@ -125,8 +135,9 @@ dependencies {
     implementation "curse.maven:curios-309927:6529130"
     implementation "curse.maven:geckolib-388172:7415496"
     implementation "curse.maven:playeranimator-658587:7389814"
-    implementation "curse.maven:cobblemon-687131:7273151"
-    implementation "curse.maven:kotlinforforge-351264:6994056"
+    implementation "com.cobblemon:neoforge:1.7.1+1.21.1"
+    implementation "thedarkcolour:kotlinforforge-neoforge:5.4.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -177,4 +188,7 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+kotlin {
+    jvmToolchain(21)
 }
