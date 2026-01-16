@@ -23,4 +23,6 @@ public class CustomSpellRegistry {
     public static final DeferredHolder<AbstractSpell, AbstractSpell> REPAIR_SPELL = registerSpell(new RepairSpell());
     public static final DeferredHolder<AbstractSpell, AbstractSpell> SCALE_SPELL = registerSpell(new ShrinkSpell());
     public static final DeferredHolder<AbstractSpell, AbstractSpell> COOKIE_SPELL = registerSpell(new CookieSpell());
+    public static final DeferredHolder<AbstractSpell, AbstractSpell> POKE_HEAL_SPELL = registerSpell(new PokeHealSpell());
+
 }

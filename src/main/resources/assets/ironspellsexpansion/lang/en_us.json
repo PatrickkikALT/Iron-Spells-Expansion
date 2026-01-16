@@ -16,5 +16,8 @@
   "spell.ironspellsexpansion.shrink_spell.guide": "Shrinks you down to a smaller size",
   "ui.ironspellsexpansion.cookie_spell": "cookie §4CREATIVE ONLY!",
   "spell.ironspellsexpansion.cookie_spell": "Cookie",
-  "spell.ironspellsexpansion.cookie_spell.guide": "Turns the target into a cookie."
+  "spell.ironspellsexpansion.cookie_spell.guide": "Turns the target into a cookie.",
+  "ui.ironspellsexpansion.poke_heal_spell": "%d health",
+  "spell.ironspellsexpansion.poke_heal_spell": "Poke Heal",
+  "spell.ironspellsexpansion.poke_heal_spell.guide": "Heals your pokemon"
 }
