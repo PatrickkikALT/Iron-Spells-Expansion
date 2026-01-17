@@ -3,7 +3,8 @@
   "package": "com.otherpatrick.ironspellsexpansion.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "PokemonBattleMixin"
+    "PokemonBattleMixin",
+    "ShowdownInterpreterMixin"
   ],
   "injectors": {
     "defaultRequire": 1

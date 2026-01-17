@@ -5,6 +5,7 @@ import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.checkerframework.checker.units.qual.A;
 
 public class CustomSpellRegistry {
     public static final DeferredRegister<AbstractSpell> SPELLS = DeferredRegister.create(io.redspace.ironsspellbooks.api.registry.SpellRegistry.SPELL_REGISTRY_KEY, IronSpellsExpansion.MODID);
@@ -24,5 +25,6 @@ public class CustomSpellRegistry {
     public static final DeferredHolder<AbstractSpell, AbstractSpell> SCALE_SPELL = registerSpell(new ShrinkSpell());
     public static final DeferredHolder<AbstractSpell, AbstractSpell> COOKIE_SPELL = registerSpell(new CookieSpell());
     public static final DeferredHolder<AbstractSpell, AbstractSpell> POKE_HEAL_SPELL = registerSpell(new PokeHealSpell());
-
+    public static final DeferredHolder<AbstractSpell, AbstractSpell> GROW_SPELL = registerSpell(new GrowSpell());
+    public static final DeferredHolder<AbstractSpell, AbstractSpell> SUNNY_SPELL = registerSpell(new SunnyDaySpell());
 }

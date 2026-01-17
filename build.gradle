@@ -37,6 +37,10 @@ repositories {
         name = 'Kotlin for Forge'
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
     }
+    maven {
+        name = "Architectury"
+        url = "https://maven.architectury.dev/"
+    }
 }
 
 
@@ -138,6 +142,7 @@ dependencies {
     implementation "com.cobblemon:neoforge:1.7.1+1.21.1"
     implementation "thedarkcolour:kotlinforforge-neoforge:5.4.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "dev.architectury:architectury-neoforge:13.0.6"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
